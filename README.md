@@ -47,6 +47,7 @@ src/
 │   └── pages_index.js         # Pages barrel file
 ├── App.jsx                    # Main application component
 └── main.jsx                   # Application entry point
+
 🚀 Key Features Implementation
 Interactive Island Navigation
 Rotatable 3D island serving as the main navigation.
@@ -66,6 +67,7 @@ Contact Form
 Input Validation: Ensures correct form submission.
 Form State Management: Manages form data and errors.
 Focus and Blur Effects: Enhances user experience during form input.
+
 🔜 Upcoming Features (TODO)
 Complete About page implementation.
 Add Projects page content.
