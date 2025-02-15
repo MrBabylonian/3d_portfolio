@@ -1,25 +1,30 @@
-3D Interactive Portfolio Website
+# 3D Interactive Portfolio Website
+
 An interactive 3D portfolio website built with React, Three.js, and TailwindCSS featuring a unique island-based navigation system.
 
-🌟 Features
-Interactive 3D Environment: Dynamic camera movements and engaging 3D elements.
-Custom 3D Models: Includes models like an island, flying circus plane, and an animated bird.
-Responsive Design: Adapts 3D elements to different screen sizes.
-Smooth Animations: Fluid animations and transitions for an immersive user experience.
-Modern UI: Clean design with TailwindCSS styling.
-Complete Routing System: Seamlessly navigate through different sections of the portfolio.
-🔧 Technical Stack
-Frontend Framework: React
-3D Graphics:
-Three.js
-React Three Fiber
-React Three Drei
-Styling: TailwindCSS
-Routing: React Router DOM
-Animation: React Spring
-📁 Project Structure
-bash
-Copy
+## 🌟 Features
+
+- **Interactive 3D Environment**: Dynamic camera movements and engaging 3D elements.
+- **Custom 3D Models**: Includes models like an island, flying circus plane, and an animated bird.
+- **Responsive Design**: Adapts 3D elements to different screen sizes.
+- **Smooth Animations**: Fluid animations and transitions for an immersive user experience.
+- **Modern UI**: Clean design with TailwindCSS styling.
+- **Complete Routing System**: Seamlessly navigate through different sections of the portfolio.
+
+## 🔧 Technical Stack
+
+- **Frontend Framework**: React
+- **3D Graphics**:
+  - Three.js
+  - React Three Fiber
+  - React Three Drei
+- **Styling**: TailwindCSS
+- **Routing**: React Router DOM
+- **Animation**: React Spring
+
+## 📁 Project Structure
+
+```bash
 src/
 ├── assets/
 │   └── 3d/                    # 3D model files (.glb)
