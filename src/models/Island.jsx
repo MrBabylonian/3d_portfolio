@@ -12,7 +12,6 @@ export function Island(
     setIslandMoving,
     isRotating,
     setIsRotating,
-    currentStage,
     setCurrentStage,
     ...props
   },
@@ -92,6 +91,7 @@ export function Island(
       if (!isRotating) setIsRotating(true);
 
       islandRef.current.rotation.y += 0.01 * Math.PI;
+      
       // rotationSpeed.current = 0.005 * Math.PI; // Can be commented out for having slowing down effect also with key controls
     }
   };
@@ -105,17 +105,34 @@ export function Island(
 
   useEffect(() => {
     const canvas = gl.domElement;
+
+    // Mouse events
     canvas.addEventListener("pointerdown", handlePointerDown);
     canvas.addEventListener("pointerup", handlePointerUp);
     canvas.addEventListener("pointermove", handlePointerMove);
+
+    // Touch events
+    canvas.addEventListener("touchstart", handlePointerDown);
+    canvas.addEventListener("touchend", handlePointerUp);
+    canvas.addEventListener("touchmove", handlePointerMove);
+
+    // Keyboard events
     globalThis.addEventListener("keydown", handleKeyDown);
     globalThis.addEventListener("keyup", handleKeyUp);
     console.log(islandRef.current.rotation.y);
     console.log(islandRef.current.position.y);
     return () => {
+      // Remove mouse events
       canvas.removeEventListener("pointerdown", handlePointerDown);
       canvas.removeEventListener("pointerup", handlePointerUp);
       canvas.removeEventListener("pointermove", handlePointerMove);
+
+      // Remove touch events
+      canvas.removeEventListener("touchstart", handlePointerDown);
+      canvas.removeEventListener("touchend", handlePointerUp);
+      canvas.removeEventListener("touchmove", handlePointerMove);
+
+      // Remove keyboard events
       globalThis.removeEventListener("keydown", handleKeyDown);
       globalThis.removeEventListener("keyup", handleKeyUp);
     };
@@ -141,7 +158,7 @@ export function Island(
     // Determine the current stage based on cumulative rotation
     let stage = 1;
 
-    let normalizedValue = Math.abs(
+    const normalizedValue = Math.abs(
       Math.floor(cumulativeRotation.current % 360 / 40) + 1,
     );
 

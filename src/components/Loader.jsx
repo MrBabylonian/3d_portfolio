@@ -2,10 +2,10 @@
 const Loader = () => {
     return (
         <div
-            className={"flex justify-center items-center w-full h-screen relative"}
+            className="flex justify-center items-center w-full h-screen relative"
         >
             <div
-                className={"w-20 h-20 border-2 border-opacity-20 border-t-blue-500 rounded-full animate-spin relative"}
+                className="w-20 h-20 border-2 border-opacity-20 border-t-blue-500 rounded-full animate-spin relative"
             >
             </div>
         </div>

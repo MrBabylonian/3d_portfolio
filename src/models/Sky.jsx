@@ -36,7 +36,8 @@ export function Sky({ isIslandMoving, isRotating, ...props }) {
   }); */
 
   return (
-    <group ref={skyRef} {...props} dispose={null}>3
+    <group ref={skyRef} {...props} dispose={null}>
+      3
       <group>
         <mesh
           castShadow={true}
