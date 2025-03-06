@@ -1,4 +1,3 @@
-import { serve } from "https://deno.land/x/http@0.217.0/server.ts";
 import { serveDir } from "https://deno.land/std@0.217.0/http/file_server.ts";
 
 const handler = async (request: Request): Promise<Response> => {
@@ -11,4 +10,14 @@ const handler = async (request: Request): Promise<Response> => {
 };
 
 console.log("Listening on http://localhost:8000");
-serve(handler);
+const server = Deno.listen({ port: 8000 });
+
+for await (const conn of server) {
+    (async () => {
+        const httpConn = Deno.serveHttp(conn);
+        for await (const requestEvent of httpConn) {
+            const response = await handler(requestEvent.request);
+            requestEvent.respondWith(response);
+        }
+    })();
+}
