@@ -7,16 +7,10 @@ const port = parseInt(Deno.env.get("PORT") || "8000");
 const app = new Hono();
 
 // Serve static files from the dist directory
-app.use("/*", async (c, next) => {
-  // const path = c.req.path;
-  
-  // Try to serve static files first
-  const staticRes = await serveStatic({ root: "./dist" })(c, next);
-  if (staticRes) {
-    return staticRes;
-  }
-  
-  // For other routes, serve index.html (SPA routing)
+app.use("/*", serveStatic({ root: "./dist" }));
+
+// For SPA routing - serve index.html for paths that don't match static files
+app.get("*", async (c) => {
   try {
     const file = await Deno.readFile("./dist/index.html");
     return new Response(file, {
@@ -26,8 +20,8 @@ app.use("/*", async (c, next) => {
         "cache-control": "public, max-age=3600"
       }
     });
-  } catch {
-    return await next();
+  } catch (e) {
+    return new Response("Not Found", { status: 404 });
   }
 });
 
