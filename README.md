@@ -10,12 +10,6 @@ An immersive 3D portfolio built with **React**, **Three.js**, and **TailwindCSS*
 
 ---
 
-## **Portfolio Preview**
-
-![Portfolio Preview](assets/images/portfolio-preview.gif)
-
----
-
 ## **🌟 Key Features**
 
 ### **3D Interactive Environment**
