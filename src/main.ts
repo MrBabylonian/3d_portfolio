@@ -13,11 +13,30 @@ console.log("Listening on http://localhost:8000");
 const server = Deno.listen({ port: 8000 });
 
 for await (const conn of server) {
-    (async () => {
-        const httpConn = Deno.serveHttp(conn);
-        for await (const requestEvent of httpConn) {
-            const response = await handler(requestEvent.request);
-            requestEvent.respondWith(response);
-        }
-    })();
+    handleHttp(conn);
+}
+
+async function handleHttp(conn: Deno.Conn) {
+    const buffer = new Uint8Array(1024);
+    const bytesRead = await conn.read(buffer);
+    if (bytesRead === null) {
+        conn.close();
+        return;
+    }
+
+    const requestText = new TextDecoder().decode(buffer.subarray(0, bytesRead));
+    const request = new Request("http://localhost:8000", {
+        method: "GET",
+        headers: new Headers(),
+    });
+
+    const response = await handler(request);
+    const responseText = await response.text();
+    const responseHeaders = Array.from(response.headers.entries())
+        .map(([key, value]) => `${key}: ${value}`)
+        .join("\r\n");
+
+    const responseMessage = `HTTP/1.1 ${response.status} ${response.statusText}\r\n${responseHeaders}\r\n\r\n${responseText}`;
+    await conn.write(new TextEncoder().encode(responseMessage));
+    conn.close();
 }
