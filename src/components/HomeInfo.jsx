@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import githubLogo from "../assets/github-mark.svg";
 
-const InfoBox = ({ text, bold, link, btnText }) => (
+const InfoBox = ({ text, bold, link, btnText, isExternal }) => (
   <div className="sm:text-xl w-96 min-w-fit px-8 py-4 bg-white border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] grid place-content-center text-center">
     <div className="flex min-w-10 max-w-max items-center justify-center space-x-4">
       <p className="min-w-min w-full">
@@ -18,7 +18,7 @@ const InfoBox = ({ text, bold, link, btnText }) => (
             >
               <Link
                 to={link}
-                target="_blank"
+                target={isExternal ? "_blank" : undefined}
                 className="flex items-center justify-center ml-1"
               >
                 {btnText}
@@ -47,6 +47,7 @@ const renderContent = {
       bold="Bedirhan 👋"
       link="/about"
       btnText="About"
+      isExternal={false}
     />
   ),
   2: (
@@ -54,6 +55,7 @@ const renderContent = {
       text="Worked on many projects and gained experience"
       link="https://github.com/MrBabylonian"
       btnText="GitHub"
+      isExternal={true}
     />
   ),
   3: (
@@ -61,6 +63,7 @@ const renderContent = {
       text="Don't hesitate to contact me"
       link="/contact"
       btnText="Contact"
+      isExternal={false}
     />
   ),
 };
