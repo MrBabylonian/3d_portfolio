@@ -1,42 +1,64 @@
-import { serveDir } from "https://deno.land/std@0.217.0/http/file_server.ts";
+import { Hono } from "https://deno.land/x/hono@v3.11.7/mod.ts";
+import { serveStatic } from "https://deno.land/x/hono@v3.11.7/middleware.ts";
 
-const handler = async (request: Request): Promise<Response> => {
-    return serveDir(request, {
-        fsRoot: "./dist", // Change this to the directory where Vite outputs the build files
-        urlRoot: "",
-        showDirListing: true,
-        enableCors: true,
+// Define the port - Deno Deploy will set the PORT env variable
+const port = parseInt(Deno.env.get("PORT") || "8000");
+
+const app = new Hono();
+
+// Serve static files from the dist directory
+app.use("/*", async (c, next) => {
+  // const path = c.req.path;
+  
+  // Try to serve static files first
+  const staticRes = await serveStatic({ root: "./dist" })(c, next);
+  if (staticRes) {
+    return staticRes;
+  }
+  
+  // For other routes, serve index.html (SPA routing)
+  try {
+    const file = await Deno.readFile("./dist/index.html");
+    return new Response(file, {
+      status: 200,
+      headers: {
+        "content-type": "text/html; charset=utf-8",
+        "cache-control": "public, max-age=3600"
+      }
     });
-};
+  } catch {
+    return await next();
+  }
+});
 
-console.log("Listening on http://localhost:8000");
-const server = Deno.listen({ port: 8000 });
-
-for await (const conn of server) {
-    handleHttp(conn);
+// Helper function to determine content type
+function getContentType(path: string): string {
+  const extension = path.split(".").pop()?.toLowerCase();
+  const contentTypes: Record<string, string> = {
+    "html": "text/html; charset=utf-8",
+    "css": "text/css; charset=utf-8",
+    "js": "text/javascript; charset=utf-8",
+    "json": "application/json; charset=utf-8",
+    "png": "image/png",
+    "jpg": "image/jpeg",
+    "jpeg": "image/jpeg",
+    "gif": "image/gif",
+    "svg": "image/svg+xml",
+    "ico": "image/x-icon",
+    "woff": "font/woff",
+    "woff2": "font/woff2",
+    "ttf": "font/ttf",
+    "otf": "font/otf",
+    "mp4": "video/mp4",
+    "webm": "video/webm",
+    "glb": "model/gltf-binary",
+    "gltf": "model/gltf+json"
+  };
+  
+  return contentTypes[extension || ""] || "application/octet-stream";
 }
 
-async function handleHttp(conn: Deno.Conn) {
-    const buffer = new Uint8Array(1024);
-    const bytesRead = await conn.read(buffer);
-    if (bytesRead === null) {
-        conn.close();
-        return;
-    }
+console.log(`HTTP server running on http://localhost:${port}/`);
 
-    const requestText = new TextDecoder().decode(buffer.subarray(0, bytesRead));
-    const request = new Request("http://localhost:8000", {
-        method: "GET",
-        headers: new Headers(),
-    });
-
-    const response = await handler(request);
-    const responseText = await response.text();
-    const responseHeaders = Array.from(response.headers.entries())
-        .map(([key, value]) => `${key}: ${value}`)
-        .join("\r\n");
-
-    const responseMessage = `HTTP/1.1 ${response.status} ${response.statusText}\r\n${responseHeaders}\r\n\r\n${responseText}`;
-    await conn.write(new TextEncoder().encode(responseMessage));
-    conn.close();
-}
+// Start the server
+Deno.serve({ port }, app.fetch);
