@@ -6,7 +6,7 @@ An immersive 3D portfolio built with **React**, **Three.js**, and **TailwindCSS*
 
 ## **✨ Live Demo**
 
-[https://babylonian.tech/](#)
+[https://babylonian.tech/](https://babylonian.tech/)
 
 ---
 
@@ -111,7 +111,6 @@ Responsive Design & Mobile Controls
 Adaptive 3D Scene Complexity: Device-dependent polygon reduction for smoother performance on mobile and desktop.
 Touch Controls: Full support for touch gestures for easy navigation on mobile devices.
 Mobile Optimized UI: All user interface elements are optimized for smaller screens with intuitive mobile gestures.
-
 📱 Performance Optimization
 Asset Optimization: Compressed textures and optimized 3D models.
 Lazy Loading: Dynamic imports for non-critical components.
@@ -119,16 +118,16 @@ Frustum Culling: Only renders what's in the camera's view.
 Level of Detail (LOD): Simplified models for distant viewing.
 Instance Meshes: Efficient rendering for repeated elements.
 Responsive Adjustments: Reduced polygon counts on mobile devices.
-
 🎨 Visual Design Elements
 Color Palette: Carefully selected colors for visual harmony.
 Typography: Custom font hierarchy for optimal readability.
 Lighting: Dynamic lighting system with ambient and directional sources.
 Post-Processing: Subtle effects including bloom and ambient occlusion.
 UI Integration: Non-intrusive interface elements that complement the 3D scene.
-
 📣 Contact
 For inquiries, feedback, or collaborations, feel free to reach out!
+
 Email: bedirhangilgiler@gmail.com
 LinkedIn: https://www.linkedin.com/in/bedirhangilgiler/
 GitHub: https://github.com/MrBabylonian
+
