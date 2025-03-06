@@ -1,29 +1,56 @@
-import { Hono } from "https://deno.land/x/hono@v3.11.7/mod.ts";
-import { serveStatic } from "https://deno.land/x/hono@v3.11.7/middleware.ts";
+// Simple file server for Deno Deploy
 
 // Define the port - Deno Deploy will set the PORT env variable
 const port = parseInt(Deno.env.get("PORT") || "8000");
 
-const app = new Hono();
+// Handle HTTP requests
+async function handler(req: Request): Promise<Response> {
+  const url = new URL(req.url);
+  let path = url.pathname;
+  
+  // Default to index.html for root path or directories
+  if (path === "/" || path.endsWith("/")) {
+    path += "index.html";
+  }
 
-// Serve static files from the dist directory
-app.use("/*", serveStatic({ root: "./dist" }));
-
-// For SPA routing - serve index.html for paths that don't match static files
-app.get("*", async (c) => {
   try {
-    const file = await Deno.readFile("./dist/index.html");
+    // Try to serve the file from the dist directory
+    // Remove leading slash for relative path
+    const filePath = `./dist${path}`;
+    const file = await Deno.readFile(filePath);
+    
+    // Set appropriate content type based on file extension
+    const contentType = getContentType(path);
+    
     return new Response(file, {
       status: 200,
       headers: {
-        "content-type": "text/html; charset=utf-8",
+        "content-type": contentType,
         "cache-control": "public, max-age=3600"
       }
     });
   } catch (e) {
-    return new Response("Not Found", { status: 404 });
+    // If file not found, serve index.html (for SPA routing)
+    if (e instanceof Deno.errors.NotFound) {
+      try {
+        const indexFile = await Deno.readFile("./dist/index.html");
+        return new Response(indexFile, {
+          status: 200,
+          headers: {
+            "content-type": "text/html; charset=utf-8",
+            "cache-control": "public, max-age=3600"
+          }
+        });
+      } catch (indexError) {
+        return new Response("Not Found", { status: 404 });
+      }
+    }
+    
+    // Server error
+    console.error("Server error:", e);
+    return new Response("Internal Server Error", { status: 500 });
   }
-});
+}
 
 // Helper function to determine content type
 function getContentType(path: string): string {
@@ -55,4 +82,4 @@ function getContentType(path: string): string {
 console.log(`HTTP server running on http://localhost:${port}/`);
 
 // Start the server
-Deno.serve({ port }, app.fetch);
+Deno.serve({ port }, handler);
