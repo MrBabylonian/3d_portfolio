@@ -1,4 +1,4 @@
-import React, { Suspense, useRef, useState } from "react";
+import React, { Suspense, useRef, useState, useEffect } from "react";
 import emailJS from "@emailjs/browser";
 import { Canvas } from "@react-three/fiber";
 import Loader from "../components/Loader.jsx";
@@ -9,7 +9,7 @@ import { Alert } from "../components/Alert.jsx";
 
 const Contact = () => {
     // Create a reference to the form element
-    const _formRef = useRef(null);
+    const formRef = useRef(null);
 
     // State to manage form data
     const [form, setForm] = useState({
@@ -26,6 +26,11 @@ const Contact = () => {
 
     // Destructure alert, showAlert, and hideAlert from useAlert hook
     const { alert, showAlert, hideAlert } = useAlert();
+
+    // Initialize EmailJS when component mounts
+    useEffect(() => {
+        emailJS.init(import.meta.env.VITE_3D_PORTFOLIO_EMAILJS_PUBLIC_KEY);
+    }, []);
 
     // Handle input change event
     const handleChange = (e) => {
@@ -54,18 +59,12 @@ const Contact = () => {
         setIsLoading(true);
         setCurrentAnimation("hit");
 
-        // Send email using emailJS
-        emailJS.send(
+        // Use emailJS.sendForm with the form reference
+        emailJS.sendForm(
             import.meta.env.VITE_3D_PORTFOLIO_EMAILJS_SERVICE_ID,
             import.meta.env.VITE_3D_PORTFOLIO_EMAILJS_TEMPLATE_ID,
-            {
-                from_name: form.name,
-                to_name: "Bedirhan",
-                from_email: form.email,
-                to_email: "bedirhangilgiler@gmail.com",
-                message: form.message,
-            },
-            import.meta.env.VITE_3D_PORTFOLIO_EMAILJS_PUBLIC_KEY,
+            formRef.current,
+            import.meta.env.VITE_3D_PORTFOLIO_EMAILJS_PUBLIC_KEY
         ).then(() => {
             setIsLoading(false);
             showAlert({
@@ -77,18 +76,18 @@ const Contact = () => {
             // Reset animation and hide alert after a delay
             setTimeout(() => {
                 setCurrentAnimation("idle");
-            }, [2000]);
+            }, 2000);
 
             setTimeout(() => {
                 hideAlert();
-            }, [4000]);
+            }, 4000);
 
             // Reset form fields
             setForm({ name: "", email: "", message: "" });
         }).catch((error) => {
             setIsLoading(false);
             setCurrentAnimation("idle");
-            console.log(error);
+            console.error("Email error:", error);
             showAlert({
                 show: true,
                 text: "I didn't receive your message 😢",
@@ -108,6 +107,7 @@ const Contact = () => {
             <div className="m-5 p-10 w-full h-full flex flex-col items-center">
                 <h1 className="text-4xl font-bold text-center">Get in touch</h1>
                 <form
+                    ref={formRef}
                     className="flex flex-col gap-7 mt-14 w-[98%]"
                     onSubmit={handleSubmit}
                 >
