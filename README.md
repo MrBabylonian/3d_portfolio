@@ -4,7 +4,7 @@ An immersive 3D portfolio built with **React**, **Three.js**, and **TailwindCSS*
 
 ---
 
-## **✨ Live Demo**
+## **✨ Live **
 
 [https://babylonian.tech/](https://babylonian.tech/)
 
