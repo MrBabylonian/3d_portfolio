@@ -129,7 +129,6 @@ UI Integration: Non-intrusive interface elements that complement the 3D scene.
 
 📣 Contact
 For inquiries, feedback, or collaborations, feel free to reach out!
-
 Email: bedirhangilgiler@gmail.com
-LinkedIn: [LinkedIn Profile](https://www.linkedin.com/in/bedirhangilgiler/)
-GitHub: [GitHub Profile](https://github.com/MrBabylonian)
+LinkedIn: https://www.linkedin.com/in/bedirhangilgiler/
+GitHub: https://github.com/MrBabylonian
