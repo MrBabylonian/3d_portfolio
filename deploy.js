@@ -12,7 +12,8 @@ serve(async (req) => {
     if (path.match(/\.(js|css|ico|png|jpg|jpeg|svg|gif|woff|woff2|ttf|eot)$/)) {
       // This is a static file request
       try {
-        const file = await Deno.readFile(`./dist${path}`);
+        // CRITICAL FIX: Use import.meta.url to get the absolute path
+        const file = await Deno.readFile(new URL(`./dist${path}`, import.meta.url));
         
         // Determine content type based on file extension
         const contentType = getContentType(path);
@@ -30,7 +31,8 @@ serve(async (req) => {
     }
     
     // For any other route or if static file not found, serve index.html
-    const indexHtml = await Deno.readFile("./dist/index.html");
+    // CRITICAL FIX: Use import.meta.url for absolute path
+    const indexHtml = await Deno.readFile(new URL("./dist/index.html", import.meta.url));
     return new Response(indexHtml, {
       status: 200,
       headers: {
