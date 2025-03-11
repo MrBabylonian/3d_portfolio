@@ -1,68 +1,57 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
-// Simplify the handler to always serve index.html for any route
-serve(async (req) => {
+const STATIC_PATH = "/static";
+
+async function handleRequest(req) {
   const url = new URL(req.url);
   const path = url.pathname;
-  
-  console.log(`Request for: ${path}`);
-  
-  try {
-    // First try to serve static assets
-    if (path.match(/\.(js|css|ico|png|jpg|jpeg|svg|gif|woff|woff2|ttf|eot)$/)) {
-      // This is a static file request
-      try {
-        // CRITICAL FIX: Use import.meta.url to get the absolute path
-        const file = await Deno.readFile(new URL(`./dist${path}`, import.meta.url));
-        
-        // Determine content type based on file extension
-        const contentType = getContentType(path);
-        
-        return new Response(file, {
-          status: 200,
-          headers: {
-            "content-type": contentType,
-          },
-        });
-      } catch (e) {
-        console.error(`Error serving static file ${path}:`, e);
-        // If file not found, continue to serve index.html
-      }
+
+  // Serve static files from /static path
+  if (path.startsWith(STATIC_PATH)) {
+    try {
+      const filePath = path.replace(STATIC_PATH, "");
+      const file = await Deno.readFile(`./dist${filePath}`);
+      const contentType = getContentType(filePath);
+      return new Response(file, {
+        headers: { "content-type": contentType },
+      });
+    } catch {
+      return new Response("Not found", { status: 404 });
     }
-    
-    // For any other route or if static file not found, serve index.html
-    // CRITICAL FIX: Use import.meta.url for absolute path
-    const indexHtml = await Deno.readFile(new URL("./dist/index.html", import.meta.url));
-    return new Response(indexHtml, {
-      status: 200,
-      headers: {
-        "content-type": "text/html; charset=utf-8",
-      },
+  }
+
+  // Serve index.html for all other routes
+  try {
+    const html = await Deno.readFile("./dist/index.html");
+    return new Response(html, {
+      headers: { "content-type": "text/html; charset=utf-8" },
     });
   } catch (e) {
-    console.error("Error:", e);
+    console.error("Error reading index.html:", e);
     return new Response("Server Error", { status: 500 });
   }
-});
+}
 
-// Helper function to determine content type
+serve(handleRequest);
+
 function getContentType(path) {
-  const ext = path.split('.').pop().toLowerCase();
-  const contentTypes = {
+  const ext = path.split('.').pop()?.toLowerCase();
+  const types = {
+    'html': 'text/html',
     'js': 'application/javascript',
     'css': 'text/css',
-    'html': 'text/html',
     'png': 'image/png',
     'jpg': 'image/jpeg',
     'jpeg': 'image/jpeg',
     'gif': 'image/gif',
     'svg': 'image/svg+xml',
     'ico': 'image/x-icon',
+    'json': 'application/json',
     'woff': 'font/woff',
     'woff2': 'font/woff2',
     'ttf': 'font/ttf',
-    'eot': 'application/vnd.ms-fontobject'
+    'glb': 'model/gltf-binary',
+    'gltf': 'model/gltf+json',
   };
-  
-  return contentTypes[ext] || 'text/plain';
+  return types[ext] || 'text/plain';
 }

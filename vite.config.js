@@ -1,45 +1,57 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import tailwindcss from "@tailwindcss/vite";
+import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
 
-// https://vite.dev/config/
-export default defineConfig({
-  plugins: [
-    react(),
-    tailwindcss(),
-  ],
-  // Use relative paths for all assets (important for SPA routing)
-  base: "./",
-  // Include 3D model files in the build
-  assetsInclude: ["**/*.glb", "**/*.fbx"],
-  // Configure the build output
-  build: {
-    // Generate sourcemaps for better debugging
-    sourcemap: true,
-    // Optimize output
-    minify: 'terser',
-    // Configure CSS
-    cssCodeSplit: true,
-    // Add manifest for better caching
-    manifest: true,
-    // Configure rollup
-    rollupOptions: {
-      output: {
-        // Better chunk naming for cache management
-        manualChunks: {
-          react: ['react', 'react-dom'],
-          router: ['react-router-dom']
-        }
-      }
+const STATIC_PATH = "/static";
+
+async function handleRequest(req) {
+  const url = new URL(req.url);
+  const path = url.pathname;
+
+  // Serve static files from /static path
+  if (path.startsWith(STATIC_PATH)) {
+    try {
+      const filePath = path.replace(STATIC_PATH, "");
+      const file = await Deno.readFile(`./dist${filePath}`);
+      const contentType = getContentType(filePath);
+      return new Response(file, {
+        headers: { "content-type": contentType },
+      });
+    } catch {
+      return new Response("Not found", { status: 404 });
     }
-  },
-  // Configure server settings for development
-  server: {
-    // Important for SPA routing in development
-    historyApiFallback: true
-  },
-  // Define environment variables if needed
-  define: {
-    'process.env.NODE_ENV': JSON.stringify(process.env.NODE_ENV || 'development')
-  },
-});
+  }
+
+  // Serve index.html for all other routes
+  try {
+    const html = await Deno.readFile("./dist/index.html");
+    return new Response(html, {
+      headers: { "content-type": "text/html; charset=utf-8" },
+    });
+  } catch (e) {
+    console.error("Error reading index.html:", e);
+    return new Response("Server Error", { status: 500 });
+  }
+}
+
+serve(handleRequest);
+
+function getContentType(path) {
+  const ext = path.split('.').pop()?.toLowerCase();
+  const types = {
+    'html': 'text/html',
+    'js': 'application/javascript',
+    'css': 'text/css',
+    'png': 'image/png',
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg',
+    'gif': 'image/gif',
+    'svg': 'image/svg+xml',
+    'ico': 'image/x-icon',
+    'json': 'application/json',
+    'woff': 'font/woff',
+    'woff2': 'font/woff2',
+    'ttf': 'font/ttf',
+    'glb': 'model/gltf-binary',
+    'gltf': 'model/gltf+json',
+  };
+  return types[ext] || 'text/plain';
+}
