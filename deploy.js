@@ -4,21 +4,25 @@ import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 
 const app = new Application();
 
-// Adding CORS to handle API requests if needed later
+// Adding CORS for API requests if needed
 app.use(oakCors({
-  origin: "*", // I'm allowing all origins for now, might restrict later
+  origin: "*", // Allow all origins
   optionsSuccessStatus: 200
 }));
 
-// This handles my static files from the dist directory
+// CRITICAL: Double-check these file paths
+// Make sure the path to your static files is correct
+const DIST_PATH = `${Deno.cwd()}/dist`; // This should match where your build files are
+
+// First try to serve as a static file
 app.use(async (ctx, next) => {
   try {
     const path = ctx.request.url.pathname;
     // Try serving the requested file directly
     await ctx.send({
-      root: `${Deno.cwd()}/dist`,
-      index: "index.html",
-      path
+      root: DIST_PATH,
+      path,
+      index: "index.html", // This serves index.html for / path
     });
   } catch {
     // If file not found, move to next handler
@@ -26,16 +30,23 @@ app.use(async (ctx, next) => {
   }
 });
 
-// This is crucial - it serves index.html for all routes
-// Fixes the refresh issue I was having with React Router
+// THIS IS THE MOST IMPORTANT PART - ensures all routes go to index.html
 app.use(async (ctx) => {
-  await ctx.send({
-    root: `${Deno.cwd()}/dist`,
-    index: "index.html"
-  });
+  try {
+    // Always serve index.html for any path not found above
+    // This enables client-side routing to work
+    await ctx.send({
+      root: DIST_PATH,
+      path: "index.html" // Note: we're directly specifying index.html here
+    });
+  } catch (error) {
+    console.error("Error serving index.html:", error);
+    ctx.response.status = 500;
+    ctx.response.body = "Internal Server Error";
+  }
 });
 
-// Setup handler for Deno Deploy
+// Handle requests with the oak application
 serve((req) => {
   return app.handle(req).then((response) => {
     return response || new Response("Not Found", { status: 404 });
