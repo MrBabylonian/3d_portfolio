@@ -1,57 +1,66 @@
 import { serve } from "https://deno.land/std@0.190.0/http/server.ts";
-import { Application } from "https://deno.land/x/oak@v12.6.1/mod.ts";
-import { oakCors } from "https://deno.land/x/cors@v1.2.2/mod.ts";
 
-const app = new Application();
-
-// Adding CORS for API requests if needed
-app.use(oakCors({
-  origin: "*", // Allow all origins
-  optionsSuccessStatus: 200
-}));
-
-// CRITICAL: Double-check these file paths
-// Make sure the path to your static files is correct
-const DIST_PATH = `${Deno.cwd()}/dist`; // This should match where your build files are
-
-// First try to serve as a static file
-app.use(async (ctx, next) => {
+// Simplify the handler to always serve index.html for any route
+serve(async (req) => {
+  const url = new URL(req.url);
+  const path = url.pathname;
+  
+  console.log(`Request for: ${path}`);
+  
   try {
-    const path = ctx.request.url.pathname;
-    // Try serving the requested file directly
-    await ctx.send({
-      root: DIST_PATH,
-      path,
-      index: "index.html", // This serves index.html for / path
+    // First try to serve static assets
+    if (path.match(/\.(js|css|ico|png|jpg|jpeg|svg|gif|woff|woff2|ttf|eot)$/)) {
+      // This is a static file request
+      try {
+        const file = await Deno.readFile(`./dist${path}`);
+        
+        // Determine content type based on file extension
+        const contentType = getContentType(path);
+        
+        return new Response(file, {
+          status: 200,
+          headers: {
+            "content-type": contentType,
+          },
+        });
+      } catch (e) {
+        console.error(`Error serving static file ${path}:`, e);
+        // If file not found, continue to serve index.html
+      }
+    }
+    
+    // For any other route or if static file not found, serve index.html
+    const indexHtml = await Deno.readFile("./dist/index.html");
+    return new Response(indexHtml, {
+      status: 200,
+      headers: {
+        "content-type": "text/html; charset=utf-8",
+      },
     });
-  } catch {
-    // If file not found, move to next handler
-    await next();
+  } catch (e) {
+    console.error("Error:", e);
+    return new Response("Server Error", { status: 500 });
   }
 });
 
-// THIS IS THE MOST IMPORTANT PART - ensures all routes go to index.html
-app.use(async (ctx) => {
-  try {
-    // Always serve index.html for any path not found above
-    // This enables client-side routing to work
-    await ctx.send({
-      root: DIST_PATH,
-      path: "index.html" // Note: we're directly specifying index.html here
-    });
-  } catch (error) {
-    console.error("Error serving index.html:", error);
-    ctx.response.status = 500;
-    ctx.response.body = "Internal Server Error";
-  }
-});
-
-// Handle requests with the oak application
-serve((req) => {
-  return app.handle(req).then((response) => {
-    return response || new Response("Not Found", { status: 404 });
-  }).catch((error) => {
-    console.error("Error handling request:", error);
-    return new Response("Internal Server Error", { status: 500 });
-  });
-});
+// Helper function to determine content type
+function getContentType(path) {
+  const ext = path.split('.').pop().toLowerCase();
+  const contentTypes = {
+    'js': 'application/javascript',
+    'css': 'text/css',
+    'html': 'text/html',
+    'png': 'image/png',
+    'jpg': 'image/jpeg',
+    'jpeg': 'image/jpeg',
+    'gif': 'image/gif',
+    'svg': 'image/svg+xml',
+    'ico': 'image/x-icon',
+    'woff': 'font/woff',
+    'woff2': 'font/woff2',
+    'ttf': 'font/ttf',
+    'eot': 'application/vnd.ms-fontobject'
+  };
+  
+  return contentTypes[ext] || 'text/plain';
+}
