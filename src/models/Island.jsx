@@ -119,8 +119,6 @@ export function Island(
     // Keyboard events
     globalThis.addEventListener("keydown", handleKeyDown);
     globalThis.addEventListener("keyup", handleKeyUp);
-    console.log(islandRef.current.rotation.y);
-    console.log(islandRef.current.position.y);
     return () => {
       // Remove mouse events
       canvas.removeEventListener("pointerdown", handlePointerDown);
@@ -167,7 +165,6 @@ export function Island(
     else if (normalizedValue === 5 || normalizedValue === 6) stage = 3;
     else if (normalizedValue === 7 || normalizedValue === 8) stage = 4;
 
-    console.log("normalized" + normalizedValue);
     setCurrentStage(stage);
   });
 
