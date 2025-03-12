@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import {NavLink} from "react-router-dom";
 import githubLogo from "../assets/github-mark.svg";
 
 export const Navbar = () => {
@@ -18,7 +18,7 @@ export const Navbar = () => {
             <nav className="flex text-lg gap-3 font-medium mt-1">
                 <NavLink
                     to="/about"
-                    className={({ isActive }) =>
+                    className={({isActive}) =>
                         `${isActive ? "text-blue-500" : "text-black"} 
                     transition-colors duration-300 hover:text-blue-400 `}
                 >
@@ -26,7 +26,7 @@ export const Navbar = () => {
                 </NavLink>
                 <NavLink
                     to="/contact"
-                    className={({ isActive }) =>
+                    className={({isActive}) =>
                         `${isActive ? "text-blue-500" : "text-black"} 
                     transition-colors duration-300 hover:text-blue-400`}
                 >

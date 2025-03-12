@@ -59,7 +59,7 @@ export function Island(
     event.stopPropagation();
     event.preventDefault();
     if (isRotating && isIslandMoving) {
-      // This calculates the change in island's horizontal position when rotating
+      // This calculates the change in the island's horizontal position when rotating
       const clientX = event.touches ? event.touches[0].clientX : event.clientX;
 
       // calculate the change in the horizontal position of the mouse cursor or touch input,
@@ -134,14 +134,14 @@ export function Island(
       globalThis.removeEventListener("keydown", handleKeyDown);
       globalThis.removeEventListener("keyup", handleKeyUp);
     };
-  }, [gl, handlePointerDown, handlePointerUp, handlePointerMove]);
+  }, [gl, handlePointerDown, handlePointerUp, handlePointerMove, handleKeyDown, handleKeyUp]);
 
   useFrame(() => {
     if (!isRotating) {
       //Slows down the island when it is not being rotated until it stops
       rotationSpeed.current *= dampingFactor;
 
-      //When the island is finally too slow this will make it stop
+      //When the island is finally too slow, this will make it stop
       if (Math.abs(rotationSpeed.current) < 0.0001) {
         rotationSpeed.current = 0;
         setIslandMoving(false);

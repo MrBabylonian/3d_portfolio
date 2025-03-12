@@ -1,11 +1,11 @@
-import React, { Suspense, useRef, useState, useEffect } from "react";
+import {Suspense, useRef, useState, useEffect} from "react";
 import emailJS from "@emailjs/browser";
-import { Canvas } from "@react-three/fiber";
+import {Canvas} from "@react-three/fiber";
 import Loader from "../components/Loader.jsx";
 import useAlert from "../hooks/useAlert.js";
 
-import { Fox } from "../constants/model_index.js";
-import { Alert } from "../components/Alert.jsx";
+import {Fox} from "../models/Fox.jsx";
+import {Alert} from "../components/Alert.jsx";
 
 const Contact = () => {
     // Create a reference to the form element
@@ -25,7 +25,7 @@ const Contact = () => {
     const [currentAnimation, setCurrentAnimation] = useState("idle");
 
     // Destructure alert, showAlert, and hideAlert from useAlert hook
-    const { alert, showAlert, hideAlert } = useAlert();
+    const {alert, showAlert, hideAlert} = useAlert();
 
     // Initialize EmailJS when component mounts
     useEffect(() => {
@@ -34,7 +34,7 @@ const Contact = () => {
 
     // Handle input change event
     const handleChange = (e) => {
-        const { name, value } = e.target;
+        const {name, value} = e.target;
         setForm((prev) => ({
             ...prev,
             [name]: value,
@@ -83,7 +83,7 @@ const Contact = () => {
             }, 4000);
 
             // Reset form fields
-            setForm({ name: "", email: "", message: "" });
+            setForm({name: "", email: "", message: ""});
         }).catch((error) => {
             setIsLoading(false);
             setCurrentAnimation("idle");
@@ -101,7 +101,8 @@ const Contact = () => {
 
     // Return the JSX structure for the Contact component
     return (
-        <section className="relative flex flex-col shadow-lg shadow-blue-200 rounded-2xl justify-self-center justify-center items-center min-w-[50%] min-h-[600px] max-h-fit h-screen w-full max-w-[1100px] mx-auto p-4">
+        <section
+            className="relative flex flex-col shadow-lg shadow-blue-200 rounded-2xl justify-self-center justify-center items-center min-w-[50%] min-h-[600px] max-h-fit h-screen w-full max-w-[1100px] mx-auto p-4">
             {/* Display alert if it is shown */}
             {alert.show && <Alert {...alert} />}
             <div className="m-5 p-10 w-full h-full flex flex-col items-center">
@@ -190,10 +191,10 @@ const Contact = () => {
                 <ambientLight
                     intensity={0.5}
                 />
-                <pointLight position={[5, 10, 0]} intensity={2} />
+                <pointLight position={[5, 10, 0]} intensity={2}/>
                 {/* Suspense to handle loading state */}
                 <Suspense
-                    fallback={<Loader />}
+                    fallback={<Loader/>}
                 >
                     {/* Fox model with current animation */}
                     <Fox

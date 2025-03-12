@@ -15,7 +15,7 @@ const About = () => {
         <section className="relative flex flex-col top-10 w-full max-w-fit mx-auto px-4 sm:px-6 lg:px-8">
             <div className="flex-1 min-w-[60%] max-h-min m-5 mb-0 p-10 pb-2">
                 <h1 className="text-4xl font-bold">
-                    Hello, I'am{" "}
+                    Hello, I&#39;m{" "}
                     <span className="text-transparent bg-clip-text bg-gradient-to-bl from-blue-300 to-blue-700 hover:from-blue-500 hover:to-blue-700">
                         Bedirhan
                     </span>
@@ -61,7 +61,7 @@ const About = () => {
 
             <div className="flex flex-col min-w-[60%] max-h-fit justify-center items-center">
                 <h3 className="text-md font-semibold text-slate-500">
-                    Bachelor's degree in Software Engineering from Amsterdam
+                    Bachelor&#39;s degree in Software Engineering from Amsterdam
                     Tech
                 </h3>
                 <Link

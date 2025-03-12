@@ -30,12 +30,12 @@ export function FlyingCircus({ isIslandMoving, isRotating, ...props }) {
       if (!isRotating && actions?.["Dynamic pose"]?.isRunning()) {
         actions["Dynamic pose"].timeScale *= 0.99;
 
-        //When the propeller finally slows down too much this stops it
+        //When the propeller finally slows down too much, this stops it
         if (actions["Dynamic pose"].timeScale < 0.001 || !isIslandMoving) {
           actions["Dynamic pose"].paused = true;
           actions["Dynamic pose"].timeScale = 0;
         } else if (isRotating && actions?.["Dynamic pose"]?.paused) {
-          //When rotating starts again, unpause and reset time scale
+          //When rotating starts again, unpause and reset timescale
           actions["Dynamic pose"].paused = false;
           actions["Dynamic pose"].timeScale = 1;
         }

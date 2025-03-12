@@ -1,14 +1,15 @@
-import React, { useEffect, useRef } from "react";
-import { useAnimations, useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
+import {useEffect, useRef} from "react";
+import {useAnimations, useGLTF} from "@react-three/drei";
+import {useFrame} from "@react-three/fiber";
 
 import birdModel from "../assets/3d/phoenix_bird.glb";
+
 // import { BirdGUI } from "../ModelGUI/BirdGUI.jsx";
 
-export function Bird({ isIslandMoving, isRotating, ...props }) {
+export function Bird({isIslandMoving, isRotating, ...props}) {
     const birdRef = useRef();
-    const { scene, animations } = useGLTF(birdModel);
-    const { actions, mixer } = useAnimations(animations, birdRef);
+    const {scene, animations} = useGLTF(birdModel);
+    const {actions, mixer} = useAnimations(animations, birdRef);
     const rotationSpeed = useRef(Math.PI * 0.01);
     const dampingFactor = 0.99;
 
@@ -24,14 +25,14 @@ export function Bird({ isIslandMoving, isRotating, ...props }) {
                 animation.play();
             }
         }
-    }, [isRotating]);
+    }, [isRotating, actions]);
 
     useFrame((state, delta) => {
-        const { clock, camera } = state;
+        const {clock, camera} = state;
 
         // Movement logic
         if (isRotating) {
-            //Update the Y position to simulate bird flight using a sine vawe
+            //Update the Y position to simulate bird flight using a sine wave
             birdRef.current.position.y = Math.sin(clock.elapsedTime) * 0.2 + 2;
 
             //Check if the bird reached a certain endpoint relative to the camera
@@ -68,12 +69,12 @@ export function Bird({ isIslandMoving, isRotating, ...props }) {
             if (!isRotating && actions?.["Take 001"]?.isRunning()) {
                 actions["Take 001"].timeScale *= 0.99;
 
-                //When the bird finally slows down too much this stops it
+                //When the bird finally slows down too much, this stops it
                 if (actions["Take 001"].timeScale < 0.001 || !isIslandMoving) {
                     actions["Take 001"].paused = true;
                     actions["Take 001"].timeScale = 0;
                 } else if (isRotating && actions?.["Dynamic pose"]?.paused) {
-                    //When rotating starts again, unpause and reset time scale
+                    //When rotating starts again, unpause and reset timescale
                     actions["Take 001"].paused = false;
                     actions["Take 001"].timeScale = 1;
                 }

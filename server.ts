@@ -1,5 +1,7 @@
-import { serve } from "https://deno.land/std@0.192.0/http/server.ts";
-import { serveDir } from "https://deno.land/std@0.192.0/http/file_server.ts";
+// @ts-ignore
+import {serve} from "https://deno.land/std@0.192.0/http/server.ts";
+// @ts-ignore
+import {serveDir} from "https://deno.land/std@0.192.0/http/file_server.ts";
 
 // Access environment variables
 const PORT = Deno.env.get("PORT") || "8000";
@@ -23,7 +25,7 @@ serve(async (req) => {
             EMAILJS_TEMPLATE_ID,
             EMAILJS_PUBLIC_KEY
         }), {
-            headers: { "content-type": "application/json; charset=utf-8" },
+            headers: {"content-type": "application/json; charset=utf-8"},
         });
     }
 
@@ -40,9 +42,9 @@ serve(async (req) => {
         !pathname.match(/\.\w+$/)
     ) {
         return new Response(await Deno.readTextFile(`${FS_ROOT}/index.html`), {
-            headers: { "content-type": "text/html; charset=utf-8" },
+            headers: {"content-type": "text/html; charset=utf-8"},
         });
     }
 
     return response;
-}, { port: parseInt(PORT) });
+}, {port: parseInt(PORT)});

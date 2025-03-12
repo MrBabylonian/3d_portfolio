@@ -15,7 +15,7 @@ const Home = () => {
         const islandRotation = [0.1, -1.40, 0];
         let islandScale;
 
-        // If the screen width is less than 768px, scale down the island
+        // If the screen width is less than 768 px, scale down the island
         if (globalThis.innerWidth < 768) {
             islandScale = [0.9, 0.9, 0.9];
         } else {
@@ -30,7 +30,7 @@ const Home = () => {
         const planeRotation = [-5.7051, 2.6389, -0.1];
         let planeScale;
 
-        // If the screen width is less than 768px, scale down the plane
+        // If the screen width is less than 768 px, scale down the plane
         if (globalThis.innerWidth < 768) {
             planeScale = [0.7, 0.7, 0.7];
         } else {
@@ -42,7 +42,7 @@ const Home = () => {
 
     // State variables to manage the current stage, rotation, and movement
     const [currentStage, setCurrentStage] = useState(1);
-    const [isRotating, setisRotating] = useState(false);
+    const [isRotating, setIsRotating] = useState(false);
     const [isIslandMoving, setIslandMoving] = useState(false);
 
     // Get the initial positions, rotations, and scales for the island and plane
@@ -82,7 +82,7 @@ const Home = () => {
                         rotation={islandRotation}
                         scale={islandScale}
                         isRotating={isRotating}
-                        setIsRotating={setisRotating}
+                        setIsRotating={setIsRotating}
                         currentStage={currentStage}
                         setCurrentStage={setCurrentStage}
                         isIslandMoving={isIslandMoving}

@@ -1,17 +1,17 @@
-import React, { useEffect, useRef } from "react";
-import { useAnimations, useGLTF } from "@react-three/drei";
+import {useEffect, useRef} from "react";
+import {useAnimations, useGLTF} from "@react-three/drei";
 
 import foxModel from "../assets/3d/fox.glb";
 
-export function Fox({ currentAnimation, ...props }) {
+export function Fox({currentAnimation, ...props}) {
     // Create a reference to the fox group
     const foxRef = useRef();
 
     // Load the GLTF model and extract nodes, materials, and animations
-    const { nodes, materials, animations } = useGLTF(foxModel);
+    const {nodes, materials, animations} = useGLTF(foxModel);
 
     // Use the useAnimations hook to get actions and mixer for the animations
-    const { actions, _mixer } = useAnimations(animations, foxRef);
+    const {actions, _mixer} = useAnimations(animations, foxRef);
 
     // useEffect hook to handle animation changes based on currentAnimation
     useEffect(() => {
@@ -70,7 +70,7 @@ export function Fox({ currentAnimation, ...props }) {
                                         material={materials["Material.017"]}
                                         skeleton={nodes.Object_11.skeleton}
                                     />
-                                    <group name="Cube002_26" />
+                                    <group name="Cube002_26"/>
                                 </group>
                             </group>
                         </group>
