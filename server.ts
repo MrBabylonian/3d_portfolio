@@ -1,6 +1,5 @@
-// @ts-ignore
+// @ts-nocheck
 import {serve} from "https://deno.land/std@0.192.0/http/server.ts";
-// @ts-ignore
 import {serveDir} from "https://deno.land/std@0.192.0/http/file_server.ts";
 
 // Access environment variables
@@ -12,39 +11,39 @@ const EMAILJS_PUBLIC_KEY = Deno.env.get("VITE_3D_PORTFOLIO_EMAILJS_PUBLIC_KEY");
 
 // Check if all required environment variables are set
 if (!EMAILJS_SERVICE_ID || !EMAILJS_TEMPLATE_ID || !EMAILJS_PUBLIC_KEY) {
-    console.error("Missing required environment variables for EmailJS");
-    Deno.exit(1);
+	console.error("Missing required environment variables for EmailJS");
+	Deno.exit(1);
 }
 
 serve(async (req) => {
-    const pathname = new URL(req.url).pathname;
+	const pathname = new URL(req.url).pathname;
 
-    if (pathname === "/env") {
-        return new Response(JSON.stringify({
-            EMAILJS_SERVICE_ID,
-            EMAILJS_TEMPLATE_ID,
-            EMAILJS_PUBLIC_KEY
-        }), {
-            headers: {"content-type": "application/json; charset=utf-8"},
-        });
-    }
+	if (pathname === "/env") {
+		return new Response(JSON.stringify({
+			EMAILJS_SERVICE_ID,
+			EMAILJS_TEMPLATE_ID,
+			EMAILJS_PUBLIC_KEY
+		}), {
+			headers: {"content-type": "application/json; charset=utf-8"},
+		});
+	}
 
-    const response = await serveDir(req, {
-        fsRoot: FS_ROOT,
-        urlRoot: "",
-        showDirListing: false,
-        enableCors: true,
-    });
+	const response = await serveDir(req, {
+		fsRoot: FS_ROOT,
+		urlRoot: "",
+		showDirListing: false,
+		enableCors: true,
+	});
 
-    if (
-        response.status === 404 &&
-        !pathname.startsWith("/api/") &&
-        !pathname.match(/\.\w+$/)
-    ) {
-        return new Response(await Deno.readTextFile(`${FS_ROOT}/index.html`), {
-            headers: {"content-type": "text/html; charset=utf-8"},
-        });
-    }
+	if (
+		response.status === 404 &&
+		!pathname.startsWith("/api/") &&
+		!pathname.match(/\.\w+$/)
+	) {
+		return new Response(await Deno.readTextFile(`${FS_ROOT}/index.html`), {
+			headers: {"content-type": "text/html; charset=utf-8"},
+		});
+	}
 
-    return response;
+	return response;
 }, {port: parseInt(PORT)});
