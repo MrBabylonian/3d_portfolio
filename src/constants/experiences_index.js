@@ -7,7 +7,7 @@ import atasunIcon from "../assets/icons/experiences/atasun.png";
 
 export const experiences = [
     {
-        title: "Full Stack Developer",
+        title: "Software Engineer",
         company_name: "Scale AI",
         icon: scaleAiIcon,
         iconBg: "#FFFFFF",
