@@ -21,7 +21,7 @@ const About = () => {
                     </span>
                 </h1>
                 <p className="mt-5 gap-3 text-slate-500">
-                    Software Engineer with a knack for creating elegant
+                    Software & Machine Learning Engineer with a knack for creating elegant
                     solutions in the least amount of time.
                 </p>
             </div>

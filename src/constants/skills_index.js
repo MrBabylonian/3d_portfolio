@@ -1,21 +1,21 @@
 import htmlIcon from "../assets/icons/skills/HTML.svg";
-import cssIcon from "../assets/icons/skills/CSS.svg";
 import tailwindIcon from "../assets/icons/skills/Tailwind.svg";
-import jsIcon from "../assets/icons/skills/JavaScript.svg";
 import tsIcon from "../assets/icons/skills/TypeScript.svg";
 import threeJS from "../assets/icons/skills/ThreeJS.svg";
 import reactIcon from "../assets/icons/skills/React.svg";
 import denoIcon from "../assets/icons/skills/DenoJS.svg";
 import javaIcon from "../assets/icons/skills/Java.svg";
 import springIcon from "../assets/icons/skills/Spring.svg";
-import springBootIcon from "../assets/icons/skills/SpringBoot.svg";
-import cSharp from "../assets/icons/skills/CSharp.svg";
 import pythonIcon from "../assets/icons/skills/Python.svg";
-import djangoIcon from "../assets/icons/skills/Django.svg";
 import sqlIcon from "../assets/icons/skills/SQL.svg";
 import jsonIcon from "../assets/icons/skills/JSON.svg";
 import gitIcon from "../assets/icons/skills/Git.svg";
 import githubIcon from "../assets/icons/skills/GitHub.svg";
+import mongoDBIcon from "../assets/icons/skills/MongoDB.svg";
+import fastApiLogo from "../assets/icons/skills/FastAPI.svg";
+import fastAiLogo from "../assets/icons/skills/FastAI.svg";
+import pyTorchLogo from "../assets/icons/skills/PyTorch.svg";
+import openCVLogo from "../assets/icons/skills/OpenCV.svg";
 
 export const skills = [
     {
@@ -25,22 +25,10 @@ export const skills = [
         website: "https://developer.mozilla.org/en-US/docs/Web/HTML",
     },
     {
-        imageUrl: cssIcon,
-        name: "CSS",
-        type: "Frontend",
-        website: "https://developer.mozilla.org/en-US/docs/Web/CSS",
-    },
-    {
         imageUrl: tailwindIcon,
         name: "Tailwind",
         type: "Frontend",
         website: "https://tailwindcss.com/",
-    },
-    {
-        imageUrl: jsIcon,
-        name: "JavaScript",
-        type: "Frontend",
-        website: "https://developer.mozilla.org/en-US/docs/Web/JavaScript",
     },
     {
         imageUrl: tsIcon,
@@ -79,34 +67,46 @@ export const skills = [
         website: "https://spring.io/",
     },
     {
-        imageUrl: springBootIcon,
-        name: "Spring Boot",
-        type: "Backend",
-        website: "https://spring.io/projects/spring-boot",
-    },
-    {
-        imageUrl: cSharp,
-        name: "C#",
-        type: "Backend",
-        website: "https://docs.microsoft.com/en-us/dotnet/csharp/",
-    },
-    {
         imageUrl: pythonIcon,
         name: "Python",
         type: "Backend",
         website: "https://www.python.org/",
     },
     {
-        imageUrl: djangoIcon,
-        name: "Django",
+        imageUrl: fastApiLogo,
+        name: "FastAPI",
         type: "Backend",
-        website: "https://www.djangoproject.com/",
+        website: "https://fastapi.tiangolo.com/",
+    },
+    {
+        imageUrl: pyTorchLogo,
+        name: "PyTorch",
+        type: "AI",
+        website: "https://pytorch.org/",
+    },
+    {
+        imageUrl: fastAiLogo,
+        name: "FastAI",
+        type: "AI",
+        website: "https://www.fast.ai/",
+    },
+    {
+        imageUrl: openCVLogo,
+        name: "OpenCV",
+        type: "AI",
+        website: "https://opencv.org/",
     },
     {
         imageUrl: sqlIcon,
         name: "SQL",
         type: "Backend",
         website: "https://en.wikipedia.org/wiki/SQL",
+    },
+    {
+        imageUrl: mongoDBIcon,
+        name: "MongoDB",
+        type: "Backend",
+        website: "https://www.mongodb.com/",
     },
     {
         imageUrl: jsonIcon,
@@ -125,99 +125,5 @@ export const skills = [
         name: "GitHub",
         type: "Tools",
         website: "https://github.com/",
-    },
-];
-
-export const experiences = [
-    {
-        title: "React.js Developer",
-        company_name: "Starbucks",
-        icon: gitIcon,
-        iconBg: "#accbe1",
-        date: "March 2020 - April 2021",
-        details: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Test Experience",
-        company_name: "Test",
-        icon: htmlIcon,
-        iconBg: "#accbe1",
-        date: "March 2020 - April 2021",
-        details: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Test Experience",
-        company_name: "Test",
-        icon: cssIcon,
-        iconBg: "#accbe1",
-        date: "March 2020 - April 2021",
-        details: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Test Experience",
-        company_name: "Test",
-        icon: jsIcon,
-        iconBg: "#accbe1",
-        date: "March 2020 - April 2021",
-        details: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Test Experience",
-        company_name: "Test",
-        icon: tsIcon,
-        iconBg: "#accbe1",
-        date: "March 2020 - April 2021",
-        details: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Test Experience",
-        company_name: "Test",
-        icon: javaIcon,
-        iconBg: "#accbe1",
-        date: "March 2020 - April 2021",
-        details: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
-    },
-    {
-        title: "Test Experience",
-        company_name: "Test",
-        icon: threeJS,
-        iconBg: "#accbe1",
-        date: "March 2020 - April 2021",
-        details: [
-            "Developing and maintaining web applications using React.js and other related technologies.",
-            "Collaborating with cross-functional teams including designers, product managers, and other developers to create high-quality products.",
-            "Implementing responsive design and ensuring cross-browser compatibility.",
-            "Participating in code reviews and providing constructive feedback to other developers.",
-        ],
     },
 ];

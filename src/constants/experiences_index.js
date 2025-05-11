@@ -4,15 +4,30 @@ import melogranoIcon from "../assets/icons/experiences/melograno.png";
 import sheratonIcon from "../assets/icons/experiences/sheraton.png";
 import eskidjiIcon from "../assets/icons/experiences/eskidji.jpg";
 import atasunIcon from "../assets/icons/experiences/atasun.png";
+import abivetIcon from "../assets/icons/experiences/Abivet.svg";
 
 export const experiences = [
     {
-        title: "Software Engineer",
+        title: "Software & Machine Learning Engineer",
+        company_name: "Abivet",
+        icon: abivetIcon,
+        iconBg: "#FFFFFF",
+        bottomColor: "#1765d1",
+        date: "April 2025 - Present",
+        details: [
+            "Designing and developing end-to-end computer vision solutions for medical imaging using Python, FastAI, and PyTorch.",
+            "Building and deploying machine learning models for condition detection via FastAPI.",
+            "Implementing full-stack systems with Java, Spring, and Python for scalable model serving.",
+            "Collaborating across teams and validating on diverse datasets while integrating the latest AI advancements.",
+        ],
+    },
+    {
+        title: "Software & Machine Learning Engineer",
         company_name: "Scale AI",
         icon: scaleAiIcon,
         iconBg: "#FFFFFF",
         bottomColor: "#1765d1",
-        date: "March 2024 - Present",
+        date: "March 2024 - Aprile 2025",
         details: [
             "Training AI models to improve coding capabilities and tackle diverse tasks.",
             "Building full-stack apps with Java, Python, React, and Django.",

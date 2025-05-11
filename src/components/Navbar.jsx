@@ -1,8 +1,10 @@
 import {NavLink} from "react-router-dom";
 import githubLogo from "../assets/github-mark.svg";
+import linkednLogo from "../assets/linkedn-mark.svg"
 
 export const Navbar = () => {
     const githubLink = "https://github.com/MrBabylonian";
+    const linkednLink = "https://linkedin.com/in/bedirhangilgiler"
     return (
         <header className="header flex justify-between fixed z-50 px-8 py-4 w-full">
             <NavLink
@@ -39,6 +41,16 @@ export const Navbar = () => {
                     <img
                         src={githubLogo}
                         alt="GitHub Logo"
+                        className="w-8 h-8 rounded-full m-0 p-0"
+                    />
+                </NavLink>
+                <NavLink
+                    to={linkednLink}
+                    target="_blank"
+                >
+                    <img
+                        src={linkednLogo}
+                        alt="Linkedn Logo"
                         className="w-8 h-8 rounded-full m-0 p-0"
                     />
                 </NavLink>
