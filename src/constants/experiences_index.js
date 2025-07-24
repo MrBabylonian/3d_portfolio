@@ -3,7 +3,7 @@ import abivetIcon from "../assets/icons/experiences/Abivet.svg";
 
 export const experiences = [
     {
-        title: "Software & Machine Learning Engineer",
+        title: "Software Engineer",
         company_name: "Abivet",
         icon: abivetIcon,
         iconBg: "#FFFFFF",
@@ -19,7 +19,7 @@ export const experiences = [
         ],
     },
     {
-        title: "Software & Machine Learning Engineer",
+        title: "Software Engineer",
         company_name: "Scale AI",
         icon: scaleAiIcon,
         iconBg: "#FFFFFF",
