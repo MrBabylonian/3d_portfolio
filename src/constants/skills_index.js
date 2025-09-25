@@ -4,8 +4,6 @@ import tsIcon from "../assets/icons/skills/TypeScript.svg";
 import threeJS from "../assets/icons/skills/ThreeJS.svg";
 import reactIcon from "../assets/icons/skills/React.svg";
 import denoIcon from "../assets/icons/skills/DenoJS.svg";
-import javaIcon from "../assets/icons/skills/Java.svg";
-import springIcon from "../assets/icons/skills/Spring.svg";
 import pythonIcon from "../assets/icons/skills/Python.svg";
 import sqlIcon from "../assets/icons/skills/SQL.svg";
 import jsonIcon from "../assets/icons/skills/JSON.svg";
@@ -14,9 +12,6 @@ import githubIcon from "../assets/icons/skills/GitHub.svg";
 import mongoDBIcon from "../assets/icons/skills/MongoDB.svg";
 import fastApiLogo from "../assets/icons/skills/FastAPI.svg";
 import fastAiLogo from "../assets/icons/skills/FastAI.svg";
-import pyTorchLogo from "../assets/icons/skills/PyTorch.svg";
-import openCVLogo from "../assets/icons/skills/OpenCV.svg";
-
 export const skills = [
     {
         imageUrl: htmlIcon,
@@ -55,18 +50,6 @@ export const skills = [
         website: "https://deno.land/",
     },
     {
-        imageUrl: javaIcon,
-        name: "Java",
-        type: "Backend",
-        website: "https://www.java.com/",
-    },
-    {
-        imageUrl: springIcon,
-        name: "Spring",
-        type: "Backend",
-        website: "https://spring.io/",
-    },
-    {
         imageUrl: pythonIcon,
         name: "Python",
         type: "Backend",
@@ -79,22 +62,10 @@ export const skills = [
         website: "https://fastapi.tiangolo.com/",
     },
     {
-        imageUrl: pyTorchLogo,
-        name: "PyTorch",
-        type: "AI",
-        website: "https://pytorch.org/",
-    },
-    {
         imageUrl: fastAiLogo,
         name: "FastAI",
         type: "AI",
         website: "https://www.fast.ai/",
-    },
-    {
-        imageUrl: openCVLogo,
-        name: "OpenCV",
-        type: "AI",
-        website: "https://opencv.org/",
     },
     {
         imageUrl: sqlIcon,

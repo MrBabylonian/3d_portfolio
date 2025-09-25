@@ -1,21 +1,20 @@
 import scaleAiIcon from "../assets/icons/experiences/scale.jpg";
-import abivetIcon from "../assets/icons/experiences/Abivet.svg";
+import ibmIcon from "../assets/icons/experiences/ibm.svg";
 
 export const experiences = [
     {
         title: "Software Engineer",
-        company_name: "Abivet",
-        icon: abivetIcon,
+        company_name: "IBM",
+        icon: ibmIcon,
         iconBg: "#FFFFFF",
         bottomColor: "#1765d1",
         date: "April 2025 - Present",
         details: [
-            "Engineered and developed end-to-end computer vision applications focused on medical imaging and diagnostics.",
-            "Built and optimized deep learning models for the automated detection and classification of medical conditions using Python, PyTorch, and FastAI.",
-            "Developed and deployed full-stack applications to serve machine learning models, utilizing Python (FastAPI), Java (Spring), TypeScript(React), and Dart(Flutter).",
-            "Collaborated with cross-functional teams of medical experts and product managers to deliver tailored software solutions.",
-            "Ensured model robustness and accuracy through rigorous validation on diverse medical imaging datasets.",
-            "Researched and integrated state-of-the-art AI and computer vision techniques to continuously improve solution efficacy.",
+            "Worked on the development and enhancement of the 'TrenItalia'" +
+            " project, a leading railway application serving millions of users across three countries.",
+            "Collaborated within a team to deliver high-quality software solutions, improving the travel experience for a large-scale user base.",
+            "Engaged in the full software development lifecycle, from design" +
+            " and coding to testing and deployment, for a critical, high-availability system."
         ],
     },
     {
