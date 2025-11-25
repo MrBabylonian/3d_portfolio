@@ -1,17 +1,20 @@
 import htmlIcon from "../assets/icons/skills/HTML.svg";
 import tailwindIcon from "../assets/icons/skills/Tailwind.svg";
 import tsIcon from "../assets/icons/skills/TypeScript.svg";
+import nodeJsIcon from "../assets/icons/skills/NodeJS.svg";
 import threeJS from "../assets/icons/skills/ThreeJS.svg";
 import reactIcon from "../assets/icons/skills/React.svg";
-import denoIcon from "../assets/icons/skills/DenoJS.svg";
 import pythonIcon from "../assets/icons/skills/Python.svg";
+import fastApiIcon from "../assets/icons/skills/FastApi.svg";
+import dockerIcon from "../assets/icons/skills/Docker.svg";
+import apacheKafkaIcon from "../assets/icons/skills/ApacheKafka.svg";
+import kubernetesIcon from "../assets/icons/skills/Kubernetes.svg";
 import sqlIcon from "../assets/icons/skills/SQL.svg";
 import jsonIcon from "../assets/icons/skills/JSON.svg";
 import gitIcon from "../assets/icons/skills/Git.svg";
 import githubIcon from "../assets/icons/skills/GitHub.svg";
 import mongoDBIcon from "../assets/icons/skills/MongoDB.svg";
-import fastApiLogo from "../assets/icons/skills/FastAPI.svg";
-import fastAiLogo from "../assets/icons/skills/FastAI.svg";
+
 export const skills = [
     {
         imageUrl: htmlIcon,
@@ -44,10 +47,10 @@ export const skills = [
         website: "https://reactjs.org/",
     },
     {
-        imageUrl: denoIcon,
-        name: "Deno",
+        imageUrl: nodeJsIcon,
+        name: "Node.js",
         type: "Backend",
-        website: "https://deno.land/",
+        website: "https://nodejs.org/",
     },
     {
         imageUrl: pythonIcon,
@@ -56,16 +59,28 @@ export const skills = [
         website: "https://www.python.org/",
     },
     {
-        imageUrl: fastApiLogo,
+        imageUrl: fastApiIcon,
         name: "FastAPI",
         type: "Backend",
         website: "https://fastapi.tiangolo.com/",
     },
     {
-        imageUrl: fastAiLogo,
-        name: "FastAI",
-        type: "AI",
-        website: "https://www.fast.ai/",
+        imageUrl: apacheKafkaIcon,
+        name: "Kafka",
+        type: "Backend",
+        website: "https://kafka.apache.org/",
+    },
+    {
+        imageUrl: dockerIcon,
+        name: "Docker",
+        type: "Backend",
+        website: "https://www.docker.com/",
+    },
+    {
+        imageUrl: kubernetesIcon,
+        name: "Kubernetes",
+        type: "Backend",
+        website: "https://kubernetes.io/",
     },
     {
         imageUrl: sqlIcon,
