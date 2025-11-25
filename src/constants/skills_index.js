@@ -5,7 +5,7 @@ import nodeJsIcon from "../assets/icons/skills/NodeJS.svg";
 import threeJS from "../assets/icons/skills/ThreeJS.svg";
 import reactIcon from "../assets/icons/skills/React.svg";
 import pythonIcon from "../assets/icons/skills/Python.svg";
-import fastApiIcon from "../assets/icons/skills/FastApi.svg";
+import fastApiIcon from "../assets/icons/skills/FastAPI.svg";
 import dockerIcon from "../assets/icons/skills/Docker.svg";
 import apacheKafkaIcon from "../assets/icons/skills/ApacheKafka.svg";
 import kubernetesIcon from "../assets/icons/skills/Kubernetes.svg";
