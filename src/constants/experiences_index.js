@@ -8,7 +8,7 @@ export const experiences = [
         icon: ibmIcon,
         iconBg: "#FFFFFF",
         bottomColor: "#1765d1",
-        date: "April 2025 - Present",
+        date: "April 2024 - Present",
         details: [
             "Worked on the development and enhancement of the 'TrenItalia'" +
             " project, a leading railway application serving millions of users across three countries.",
@@ -23,7 +23,7 @@ export const experiences = [
         icon: scaleAiIcon,
         iconBg: "#FFFFFF",
         bottomColor: "#1765d1",
-        date: "March 2023 - Aprile 2025",
+        date: "March 2021 - Aprile 2024",
         details: [
             "Trained and fine-tuned AI models to augment coding capabilities and automate complex software development tasks.",
             "Engineered and developed scalable full-stack applications and microservices using Java (Spring), Python (Django), and TypeScript(React).",
