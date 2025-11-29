@@ -31,7 +31,7 @@ export const skills = [
     {
         imageUrl: tsIcon,
         name: "TypeScript",
-        type: "Frontend",
+        type: "Language",
         website: "https://www.typescriptlang.org/",
     },
     {
@@ -55,7 +55,7 @@ export const skills = [
     {
         imageUrl: pythonIcon,
         name: "Python",
-        type: "Backend",
+        type: "Language",
         website: "https://www.python.org/",
     },
     {
