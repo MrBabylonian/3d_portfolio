@@ -103,13 +103,13 @@ export const skills = [
     {
         imageUrl: gitIcon,
         name: "Git",
-        type: "Tools",
+        type: "Tool",
         website: "https://git-scm.com/",
     },
     {
         imageUrl: githubIcon,
         name: "GitHub",
-        type: "Tools",
+        type: "Tool",
         website: "https://github.com/",
     },
 ];
