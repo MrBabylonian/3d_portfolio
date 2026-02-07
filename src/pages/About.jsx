@@ -30,7 +30,7 @@ const About = () => {
       </div>
 
       <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-8 lg:gap-12 mx-4 sm:mx-10 pt-3 pb-0">
-        {skills.map((skill, index) => (
+        {skills.map((skill) => (
           <a href={skill.website} target="_blank" rel="noopener noreferrer" key={skill.name}>
             <div
               className="flex justify-center items-center transform transition-transform duration-300 hover:scale-125"
