@@ -1,6 +1,7 @@
 import {Suspense, useRef, useState, useEffect} from "react";
 import emailJS from "@emailjs/browser";
 import {Canvas} from "@react-three/fiber";
+import {Html} from "@react-three/drei";
 import Loader from "../components/Loader.jsx";
 import useAlert from "../hooks/useAlert.js";
 
@@ -195,7 +196,7 @@ const Contact = () => {
                     <pointLight position={[5, 10, 0]} intensity={2}/>
                     {/* Suspense to handle loading state */}
                     <Suspense
-                        fallback={<Loader/>}
+                        fallback={<Html center><Loader/></Html>}
                     >
                         {/* Fox model with current animation */}
                         <Fox
