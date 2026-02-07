@@ -4,7 +4,6 @@ import {
 } from "react-vertical-timeline-component";
 import "react-vertical-timeline-component/style.min.css";
 
-import { Link } from "react-router-dom";
 import { skills } from "../constants/skills_index.js";
 import { experiences } from "../constants/experiences_index.js";
 import universityLogo from "../assets/amsterdam_tech.png";
@@ -12,30 +11,29 @@ import CTA from "../components/CTA.jsx";
 
 const About = () => {
   return (
-    <section className="relative flex flex-col top-10 w-full max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-      <div className="flex-1 max-h-min mx-2 sm:m-5 mb-0 p-4 sm:p-10 pb-2">
+    <section className="relative flex flex-col top-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-10">
+      <div className="mx-2 sm:mx-5 px-4 sm:px-10 pt-4 sm:pt-8 pb-1">
         <h1 className="text-3xl sm:text-4xl font-bold">
           Hello, I&#39;m{" "}
           <span className="text-transparent bg-clip-text bg-gradient-to-bl from-blue-300 to-blue-700 hover:from-blue-500 hover:to-blue-700">
             Bedirhan
           </span>
         </h1>
-        <p className="mt-5 gap-3 text-slate-500">
+        <p className="mt-4 text-slate-500">
           Software Engineer with a knack for creating elegant
           solutions in the least amount of time.
         </p>
       </div>
 
-      <div className="flex-1 max-h-fit mx-2 sm:mx-5 px-4 sm:p-10 pt-5 pb-1">
+      <div className="mx-2 sm:mx-5 px-4 sm:px-10 pt-3 pb-1">
         <h3 className="text-2xl font-semibold">My Skills</h3>
       </div>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-8 lg:gap-12 mx-4 sm:m-10 mt-0 pt-5 pb-0">
+      <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-8 lg:gap-12 mx-4 sm:mx-10 pt-3 pb-0">
         {skills.map((skill, index) => (
-          <Link to={skill.website} key={skill.name} target="_blank">
+          <a href={skill.website} target="_blank" rel="noopener noreferrer" key={skill.name}>
             <div
               className="flex justify-center items-center transform transition-transform duration-300 hover:scale-125"
-              key={index}
             >
               <div className="flex flex-col items-center justify-center w-28 h-32 sm:w-36 sm:h-40 lg:w-40 lg:h-44 p-3 sm:p-4 lg:p-5 shadow-sm shadow-blue-100 rounded-r-4xl">
                 <img
@@ -49,11 +47,11 @@ const About = () => {
                 <p className="text-[10px] sm:text-xs lg:text-sm text-slate-500 text-center leading-tight">{skill.type}</p>
               </div>
             </div>
-          </Link>
+          </a>
         ))}
       </div>
 
-      <div className="flex-1 max-h-fit text-center">
+      <div className="max-h-fit text-center mt-8 sm:mt-12">
         <h3 className="text-2xl font-semibold pb-4">
           My Experiences
         </h3>
@@ -64,9 +62,10 @@ const About = () => {
           Bachelor&#39;s degree in Software Engineering from Amsterdam
           Tech
         </h3>
-        <Link
-          to="https://amsterdam.tech/"
+        <a
+          href="https://amsterdam.tech/"
           target="_blank"
+          rel="noopener noreferrer"
           className="hover:scale-125 transform transition-transform duration-300 text-slate-500"
         >
           <img
@@ -75,7 +74,7 @@ const About = () => {
             alt="Amsterdam Tech Logo"
           />
           2021 - 2024
-        </Link>
+        </a>
       </div>
 
       <div className="px-2 sm:px-6 lg:px-8 flex items-center justify-center">
