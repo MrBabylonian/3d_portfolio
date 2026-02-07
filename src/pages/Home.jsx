@@ -52,7 +52,7 @@ const Home = () => {
         adjustPlaneForScreenSize();
 
     return (
-        <section className="w-screen h-screen relative">
+        <section className="w-full h-screen relative overflow-hidden">
             {/* Display the HomeInfo component at the bottom center of the screen */}
             <div className="absolute bottom-14 left-0 right-0 z-10 flex items-center justify-center max-w-[85%] mx-auto">
                 {currentStage && <HomeInfo currentStage={currentStage} />}
