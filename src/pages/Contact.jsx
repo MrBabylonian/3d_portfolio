@@ -102,14 +102,14 @@ const Contact = () => {
     // Return the JSX structure for the Contact component
     return (
         <section
-            className="relative flex flex-col shadow-lg shadow-blue-200 rounded-2xl justify-self-center justify-center items-center min-w-[50%] min-h-[600px] max-h-fit h-screen w-full max-w-[1100px] mx-auto p-4">
+            className="relative flex flex-col shadow-lg shadow-blue-200 rounded-2xl justify-self-center justify-center items-center min-h-[600px] max-h-fit h-screen w-full max-w-[1100px] mx-auto p-2 sm:p-4">
             {/* Display alert if it is shown */}
             {alert.show && <Alert {...alert} />}
-            <div className="m-5 p-10 w-full h-full flex flex-col items-center">
-                <h1 className="text-4xl font-bold text-center">Get in touch</h1>
+            <div className="m-2 sm:m-5 p-4 sm:p-10 w-full h-full flex flex-col items-center">
+                <h1 className="text-3xl sm:text-4xl font-bold text-center">Get in touch</h1>
                 <form
                     ref={formRef}
-                    className="flex flex-col gap-7 mt-14 w-[98%]"
+                    className="flex flex-col gap-5 sm:gap-7 mt-8 sm:mt-14 w-full"
                     onSubmit={handleSubmit}
                 >
                     <div className="flex flex-col gap-4">
@@ -119,7 +119,7 @@ const Contact = () => {
                             <input
                                 type="text"
                                 name="name"
-                                className="mt-2 p-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none transition-colors"
+                                className="mt-2 p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none transition-colors"
                                 placeholder="John"
                                 required
                                 value={form.name}
@@ -135,7 +135,7 @@ const Contact = () => {
                             <input
                                 type="email"
                                 name="email"
-                                className="mt-2 p-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none transition-colors"
+                                className="mt-2 p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none transition-colors"
                                 placeholder="john@gmail.com"
                                 required
                                 value={form.email}
@@ -150,7 +150,7 @@ const Contact = () => {
                             Message
                             <textarea
                                 name="message"
-                                className="mt-2 p-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none transition-colors min-h-[150px]"
+                                className="mt-2 p-2.5 sm:p-3 rounded-lg border border-gray-300 focus:border-blue-500 outline-none transition-colors min-h-[120px] sm:min-h-[150px]"
                                 placeholder="Let me know how can I help you!"
                                 required
                                 value={form.message}
@@ -174,37 +174,39 @@ const Contact = () => {
                 </form>
             </div>
             {/* Canvas to render the Fox model */}
-            <Canvas
-                className="w-full h-full"
-                camera={{
-                    position: [0, 0, 5],
-                    fov: 75,
-                    near: 0.1,
-                    far: 1000,
-                }}
-            >
-                {/* Lighting for the scene */}
-                <directionalLight
-                    intensity={2.5}
-                    position={[0, 0, 1]}
-                />
-                <ambientLight
-                    intensity={0.5}
-                />
-                <pointLight position={[5, 10, 0]} intensity={2}/>
-                {/* Suspense to handle loading state */}
-                <Suspense
-                    fallback={<Loader/>}
+            <div className="w-full h-[250px] sm:h-[350px]">
+                <Canvas
+                    className="w-full h-full"
+                    camera={{
+                        position: [0, 0, 5],
+                        fov: 75,
+                        near: 0.1,
+                        far: 1000,
+                    }}
                 >
-                    {/* Fox model with current animation */}
-                    <Fox
-                        currentAnimation={currentAnimation}
-                        position={[0.5, 0.35, 0]}
-                        rotation={[12.6, -0.8, 0]}
-                        scale={[0.7, 0.7, 0.7]}
+                    {/* Lighting for the scene */}
+                    <directionalLight
+                        intensity={2.5}
+                        position={[0, 0, 1]}
                     />
-                </Suspense>
-            </Canvas>
+                    <ambientLight
+                        intensity={0.5}
+                    />
+                    <pointLight position={[5, 10, 0]} intensity={2}/>
+                    {/* Suspense to handle loading state */}
+                    <Suspense
+                        fallback={<Loader/>}
+                    >
+                        {/* Fox model with current animation */}
+                        <Fox
+                            currentAnimation={currentAnimation}
+                            position={[0.5, 0.35, 0]}
+                            rotation={[12.6, -0.8, 0]}
+                            scale={[0.7, 0.7, 0.7]}
+                        />
+                    </Suspense>
+                </Canvas>
+            </div>
         </section>
     );
 };

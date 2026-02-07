@@ -7,7 +7,7 @@ const CTA = () => {
                 Have a project in mind? <br className="sm:block hidden"/>
                 <span className="text-primary">Let&#39;s talk.</span>
             </p>
-            <Link to="/contact" className="block min-w-fit w-[20%] mt-4">
+            <Link to="/contact" className="block w-full sm:w-auto mt-4">
                 <button type="button"
                         className="w-full text-white font-semibold py-3 px-6 rounded-lg transition-all bg-gradient-to-r from-blue-400 to-blue-600 hover:from-blue-500 hover:to-blue-700">
                     Get in touch

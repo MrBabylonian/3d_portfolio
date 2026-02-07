@@ -3,11 +3,11 @@ import githubLogo from "../assets/github-mark.svg";
 
 const InfoBox = ({text, bold, link, btnText, isExternal}) => (
     <div
-        className="sm:text-xl w-96 min-w-fit px-8 py-4 bg-white border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] grid place-content-center text-center">
-        <div className="flex min-w-10 max-w-max items-center justify-center space-x-4">
-            <p className="min-w-min w-full">
+        className="sm:text-xl w-full max-w-96 px-4 sm:px-8 py-4 bg-white border-4 border-black shadow-[8px_8px_0px_rgba(0,0,0,1)] grid place-content-center text-center">
+        <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4">
+            <p className="w-full">
                 {text}
-                {bold ? <span className="min-w-min font-bold">{bold}</span> : null}
+                {bold ? <span className="font-bold">{bold}</span> : null}
             </p>
             {link && btnText
                 ? (
