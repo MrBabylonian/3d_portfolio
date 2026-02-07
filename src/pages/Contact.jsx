@@ -196,7 +196,7 @@ const Contact = () => {
                     <pointLight position={[5, 10, 0]} intensity={2}/>
                     {/* Suspense to handle loading state */}
                     <Suspense
-                        fallback={<Html center><Loader/></Html>}
+                        fallback={<Html center><Loader className="w-32 h-32"/></Html>}
                     >
                         {/* Fox model with current animation */}
                         <Fox
